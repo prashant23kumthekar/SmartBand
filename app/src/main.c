@@ -1,44 +1,48 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
- * SmartBand application entry point.
- * Target: nrf52840dk/nrf52840 until a custom board exists.
+ * SmartBand phase 3: IMU steps, a heart-rate burst, and a sleeping OLED.
+ * Target: nrf52840dk/nrf52840 with the Arduino-header overlay.
  */
 
-#include <zephyr/kernel.h>
-#include <zephyr/drivers/gpio.h>
+#include "band.h"
 
-#define SLEEP_TIME_MS 1000
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/kernel.h>
 
 #define LED0_NODE DT_ALIAS(led0)
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
+struct band_metrics band = {
+	.battery_pct = -1,
+};
+
+void band_init(void)
+{
+	k_mutex_init(&band.lock);
+}
+
 int main(void)
 {
-	int ret;
+	bool led_ready = false;
 
-	printk("SmartBand booted\n");
+	printk("SmartBand sensors\n");
+	band_init();
 
-	if (!gpio_is_ready_dt(&led)) {
-		printk("LED device is not ready\n");
-		return 0;
+	if (gpio_is_ready_dt(&led) && gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE) == 0) {
+		led_ready = true;
 	}
 
-	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
-	if (ret < 0) {
-		printk("LED configure failed: %d\n", ret);
-		return 0;
-	}
+	imu_start();
+	ppg_start();
+	ui_start();
 
 	while (1) {
-		ret = gpio_pin_toggle_dt(&led);
-		if (ret < 0) {
-			printk("LED toggle failed: %d\n", ret);
-			return 0;
+		if (led_ready) {
+			(void)gpio_pin_toggle_dt(&led);
 		}
-
-		k_msleep(SLEEP_TIME_MS);
+		k_msleep(1000);
 	}
 
 	return 0;
