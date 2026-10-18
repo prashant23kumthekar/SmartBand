@@ -1,6 +1,6 @@
 # SmartBand Zephyr workspace.
 # Pin Zephyr and import only the modules the nRF52840 application needs.
-# Bring the tree in with: west init -l . && west update
+# From the repository root: west update
 
 manifest:
   remotes:

@@ -9,7 +9,7 @@ app/            SmartBand application
 zephyr/         Zephyr 4.4.2
 modules/        cmsis_6, hal_nordic, segger
 doc/            nRF52840 product specification and Nordic DK hardware files
-west.yml        pins the Zephyr revision and module list
+app/west.yml    pins the Zephyr revision and module list
 ```
 
 ## Get the code
@@ -20,7 +20,7 @@ From a fresh clone, with [west](https://docs.zephyrproject.org/latest/develop/we
 west update
 ```
 
-That checks out Zephyr v4.4.2 and the modules listed in `west.yml` (cmsis_6, hal_nordic, segger). `.west/config` already points this repository at that manifest.
+That checks out Zephyr v4.4.2 and the modules listed in `app/west.yml` (cmsis_6, hal_nordic, segger). `.west/config` already points this repository at that manifest. The manifest lives in `app/` so the Zephyr tree can sit next to the application without being detected as a Zephyr module.
 
 Host tools and the Zephyr SDK are still required to compile. See the [Zephyr getting started guide](https://docs.zephyrproject.org/4.4.2/develop/getting_started/index.html).
 
@@ -34,7 +34,7 @@ west build -b nrf52840dk/nrf52840 app
 
 Flash a connected kit with `west flash`. Console output uses the kit's UART.
 
-To refresh Zephyr from `west.yml`:
+To refresh Zephyr from `app/west.yml`:
 
 ```
 west update
