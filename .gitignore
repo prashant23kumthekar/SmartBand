@@ -1,0 +1,11 @@
+# Fetched by `west update` from west.yml. Not vendored: Zephyr 4.4.2 plus
+# cmsis_6, hal_nordic, and segger is about 800 MB.
+/zephyr/
+/modules/
+
+build/
+**/build/
+twister-out*/
+.cache/
+*.pyc
+__pycache__/
