@@ -1,10 +1,7 @@
-# Fetched by `west update` from west.yml. Not vendored: Zephyr 4.4.2 plus
-# cmsis_6, hal_nordic, and segger is about 800 MB.
-/zephyr/
-/modules/
+# Local build output. Do not use a blanket "build/" rule: Zephyr has
+# source directories with that name (scripts/build, doc/build).
+/build/
 
-build/
-**/build/
 twister-out*/
 .cache/
 *.pyc
