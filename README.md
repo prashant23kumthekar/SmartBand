@@ -8,6 +8,7 @@ nRF52840 activity-band firmware on Zephyr 4.4.2. The application lives in `app/`
 app/            SmartBand application
 zephyr/         Zephyr 4.4.2
 modules/        cmsis_6, hal_nordic, segger
+hardware/schematic/   KiCad rev A schematic
 doc/            nRF52840 product specification and Nordic DK hardware files
 app/west.yml    pins the Zephyr revision and module list
 ```
