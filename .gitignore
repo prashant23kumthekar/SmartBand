@@ -1,0 +1,8 @@
+# Local build output. Do not use a blanket "build/" rule: Zephyr has
+# source directories with that name (scripts/build, doc/build).
+/build/
+
+twister-out*/
+.cache/
+*.pyc
+__pycache__/

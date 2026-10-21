@@ -1,0 +1,20 @@
+# SmartBand Zephyr workspace.
+# Pin Zephyr and import only the modules the nRF52840 application needs.
+# From the repository root: west update
+
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: v4.4.2
+      import:
+        # Cortex-M needs cmsis_6. nRF52840 needs hal_nordic (nrfx).
+        # segger is the RTT console used on the development kit.
+        name-allowlist:
+          - cmsis_6
+          - hal_nordic
+          - segger
