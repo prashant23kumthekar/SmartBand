@@ -1,7 +1,8 @@
 # Local build output. Do not use a blanket "build/" rule: Zephyr has
 # source directories with that name (scripts/build, doc/build).
 /build/
-
+/zephyr-sdk-1.0.1
+zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz
 twister-out*/
 .cache/
 *.pyc
