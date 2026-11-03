@@ -1,0 +1,84 @@
+name: Companion
+
+on:
+  push:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/companion.yml"
+  pull_request:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/companion.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: mobile
+          sparse-checkout-cone-mode: true
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.9
+          channel: stable
+          cache: true
+      - working-directory: mobile
+        run: flutter pub get
+      - working-directory: mobile
+        run: flutter analyze
+      - working-directory: mobile
+        run: flutter test
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: mobile
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.9
+          channel: stable
+          cache: true
+      - working-directory: mobile
+        run: flutter pub get
+      - working-directory: mobile
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: smartband-apk
+          path: mobile/build/app/outputs/flutter-apk/app-release.apk
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: mobile
+          sparse-checkout-cone-mode: true
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.9
+          channel: stable
+          cache: true
+      - working-directory: mobile
+        run: flutter pub get
+      - working-directory: mobile
+        run: flutter build ios --release --no-codesign
+      - name: Package unsigned IPA
+        working-directory: mobile/build/ios/iphoneos
+        run: |
+          mkdir -p Payload
+          cp -R Runner.app Payload/
+          zip -qr smartband-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: smartband-unsigned-ipa
+          path: mobile/build/ios/iphoneos/smartband-unsigned.ipa
