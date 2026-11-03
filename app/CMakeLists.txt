@@ -10,6 +10,8 @@ target_sources(app PRIVATE
   src/imu.c
   src/ppg.c
   src/ui.c
+  ble/ble.c
+  ble/gatt.c
 )
 
-target_include_directories(app PRIVATE src)
+target_include_directories(app PRIVATE src ble)

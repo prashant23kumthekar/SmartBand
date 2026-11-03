@@ -1,11 +1,12 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
- * SmartBand phase 3: IMU steps, a heart-rate burst, and a sleeping OLED.
+ * SmartBand sensors plus a BLE GATT peripheral.
  * Target: nrf52840dk/nrf52840 with the Arduino-header overlay.
  */
 
 #include "band.h"
+#include "ble.h"
 
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
@@ -27,7 +28,7 @@ int main(void)
 {
 	bool led_ready = false;
 
-	printk("SmartBand sensors\n");
+	printk("SmartBand sensors and BLE\n");
 	band_init();
 
 	if (gpio_is_ready_dt(&led) && gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE) == 0) {
@@ -37,6 +38,7 @@ int main(void)
 	imu_start();
 	ppg_start();
 	ui_start();
+	(void)ble_start();
 
 	while (1) {
 		if (led_ready) {
