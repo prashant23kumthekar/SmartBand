@@ -9,6 +9,7 @@
 *.pyc
 *.swp
 *.swo
+!subsys/logging/backends/Kconfig.swo
 *~
 
 # Emacs
@@ -74,6 +75,10 @@ Cargo.lock
 # Normal west builds will place the Rust target directory under the build directory.  However,
 # sometimes IDEs and such will litter these target directories as well.
 target/
+!drivers/i2c/target/
+!drivers/i2c/target/**
+!include/zephyr/drivers/i2c/target/
+!include/zephyr/drivers/i2c/target/**
 
 # CI output
 compliance.xml
