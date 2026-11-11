@@ -31,14 +31,18 @@ sudo apt install --no-install-recommends git cmake ninja-build gperf \
 sudo apt install python3.12 python3.12-venv python3.12-dev
 ```
 
-Create a venv and install west (do not use the system Python 3.10):
+Create a venv with **Python 3.12** and install west there. Do not `pip install --user west` on Ubuntu’s `/usr/bin/python3` (3.10): CMake will fail with `WEST_PYTHON=/usr/bin/python3`.
 
 ```
 python3.12 -m venv $HOME/zephyr-venv
 source $HOME/zephyr-venv/bin/activate
+python --version          # must print 3.12.x
 pip install -U pip
 pip install west
+which west                # must be $HOME/zephyr-venv/bin/west
 ```
+
+If `which west` is `~/.local/bin/west` or `/usr/bin/west`, the venv is not active (`hash -r` after `source`). Recreate an old 3.10 venv with `python3.12 -m venv $HOME/zephyr-venv --clear`.
 
 Add yourself to `dialout` so UART adapters and the DK VCOM port work without sudo, then log out and back in:
 
@@ -77,9 +81,26 @@ cd SmartBand
 pip install -r zephyr/scripts/requirements-base.txt
 ```
 
-This repository is already a west workspace (`.west/config` points at `app/west.yml`). The kernel and modules are vendored under `zephyr/` and `modules/`. You do **not** run `west init`.
+### West setup
 
-`west build` still expects `zephyr/` to be a git checkout tagged `v4.4.2`. A GitHub clone often has no `zephyr/.git`. One-time fix:
+This repository is already a west workspace. `.west/config` sets `manifest.path = app` and `zephyr.base = zephyr`. **Do not run `west init`.**
+
+Every new shell:
+
+```
+source $HOME/zephyr-venv/bin/activate
+hash -r
+export ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk-1.0.1
+cd /path/to/SmartBand
+python --version        # 3.12.x, not 3.10.12
+which west              # .../zephyr-venv/bin/west
+west --version          # expect 1.2+ (this tree is tested with 1.5.0)
+west topdir             # must print this repository root
+```
+
+If CMake reports `Found unsuitable version "3.10.12"` / `WEST_PYTHON=/usr/bin/python3`, stop and activate the 3.12 venv. Do not pass `-DPython3_EXECUTABLE` as a workaround while west itself is still 3.10.
+
+`west build` expects `zephyr/` to be a git checkout tagged `v4.4.2`. A GitHub clone often has no `zephyr/.git`. One-time fix:
 
 ```
 cd zephyr
@@ -92,11 +113,13 @@ cd ..
 
 If `west build` then fails on missing `zephyr/drivers/i2c/target` or `Kconfig.swo`, those paths were ignored by Zephyr's `.gitignore`. Restore them from the v4.4.2 tree or keep the copies already in this repo.
 
+After a reboot, only `source` the venv and export `ZEPHYR_SDK_INSTALL_DIR` again. West stays installed in the venv.
+
 To refresh Zephyr from GitHub instead of the snapshot: remove `zephyr/` and `modules/`, then `west update`.
 
 ## Build
 
-From the repository root, with the venv active and `ZEPHYR_SDK_INSTALL_DIR` set.
+From the repository root, with the **3.12** venv active (`which west` inside that venv) and `ZEPHYR_SDK_INSTALL_DIR` set. A successful configure line looks like `Found Python3: .../zephyr-venv/bin/python3.12`.
 
 nRF52840 Development Kit:
 
