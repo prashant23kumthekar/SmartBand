@@ -1,0 +1,29 @@
+name: Main Config
+version: 1.0.0
+schema: v1
+
+models:
+  - title: Qwen 2.5 3B Local
+    provider: ollama
+    model: qwen2.5:3b
+    systemPrompt: >-
+      You are an expert developer agent with full access to the local file system. 
+      When asked to create, write, edit, or modify a file, you MUST use your file 
+      writing tools to write the code directly to disk instead of explaining it 
+      or using markdown code blocks. Always save your work.
+    roles:
+      - chat
+      - edit
+
+tabAutocompleteModel:
+  title: Qwen 2.5 3B Local
+  provider: ollama
+  model: qwen2.5:3b
+
+mcpServers:
+  - name: pdf-reader
+    command: npx
+    args:
+      - "-y"
+      - "@modelcontextprotocol/server-filesystem"
+      - "/home/pk/git/SmartBand/doc/"

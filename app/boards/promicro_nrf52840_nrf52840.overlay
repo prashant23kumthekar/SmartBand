@@ -1,0 +1,80 @@
+/*
+ * SmartBand sensors on a Pro Micro / Nice!Nano-style nRF52840.
+ *
+ * Keep I2C. Do not move these parts onto SPI: MAX30102 and MAX17048 have
+ * no SPI interface, and imu.c / the OLED node talk I2C.
+ *
+ * Bus is the board's i2c0 (promicro_nrf52840-pinctrl.dtsi):
+ *   P1.00 SDA, P0.11 SCL
+ *
+ * Header GPIOs that exist on Nice!Nano / SuperMini clones:
+ *   P1.13  button to GND
+ *   P1.11  OLED reset, active low
+ *   P0.24  haptic MOSFET gate, active high
+ *
+ * DK P1.10 and P0.04 are not on this header, so they are not reused.
+ *
+ * Wiring:
+ *   3V3, GND
+ *   P1.00 SDA, P0.11 SCL, plus 4.7 kΩ pull-ups to 3V3
+ *   LSM6DSO (0x6A, SDO/SA0 low, CS tied to VDD),
+ *   MAX30102 (0x57), MAX17048 (0x36), SSD1306 (0x3C)
+ */
+
+/ {
+	chosen {
+		zephyr,display = &ssd1306;
+	};
+
+	aliases {
+		fuel-gauge0 = &max17048;
+		heart-rate-sensor = &max30101;
+	};
+
+	zephyr,user {
+		button-gpios = <&gpio1 13 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		haptic-gpios = <&gpio0 24 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&i2c0 {
+	lsm6dso: lsm6dso@6a {
+		compatible = "smartband,lsm6dso";
+		reg = <0x6a>;
+		status = "okay";
+	};
+
+	max30101: max30101@57 {
+		compatible = "maxim,max30101";
+		reg = <0x57>;
+		status = "okay";
+		acq-mode = "heart-rate";
+		smp-ave = <1>;
+		smp-sr = <100>;
+		led-pw = <215>;
+		adc-rge = <4096>;
+		led-pa = [3f 00 00];
+		fifo-rollover-en;
+	};
+
+	max17048: max17048@36 {
+		compatible = "maxim,max17048";
+		reg = <0x36>;
+		status = "okay";
+	};
+
+	ssd1306: ssd1306@3c {
+		compatible = "solomon,ssd1306";
+		reg = <0x3c>;
+		width = <128>;
+		height = <64>;
+		segment-offset = <0>;
+		page-offset = <0>;
+		display-offset = <0>;
+		multiplex-ratio = <63>;
+		segment-remap;
+		com-invdir;
+		prechargep = <0x22>;
+		reset-gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
+	};
+};

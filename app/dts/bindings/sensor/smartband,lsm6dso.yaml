@@ -1,0 +1,11 @@
+# Copyright (c) 2026 SmartBand
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  LSM6DSO accelerometer on the SmartBand I2C bus. The application reads this
+  node directly. The Zephyr ST driver is not used, because that driver needs
+  the hal_st module.
+
+compatible: "smartband,lsm6dso"
+
+include: [i2c-device.yaml]

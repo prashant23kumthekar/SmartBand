@@ -1,0 +1,80 @@
+/*
+ * SmartBand phase 3 on the nRF52840 DK Arduino header.
+ *
+ * I2C is the kit's arduino_i2c (i2c0): P0.26 SDA (D14), P0.27 SCL (D15).
+ * The rev A sheet labels those pins the other way around (P0.26 SCL, P0.27 SDA).
+ * This overlay follows the development kit so a breakout plugged into the
+ * Arduino header enumerates. A product-board overlay should follow the sheet.
+ *
+ * P0.11 and P0.12 are the sheet's IMU and PPG interrupts, and they are also
+ * the kit's BUTTON1 and BUTTON2, so those interrupts are not wired here.
+ * Polling does not need them.
+ *
+ * Wiring:
+ *   3V3, GND
+ *   D14 SDA, D15 SCL: LSM6DSO (0x6A, SDO/SA0 low, CS high),
+ *                     MAX30102 (0x57), MAX17048 (0x36), SSD1306 (0x3C)
+ *   D8  P1.10  button to GND
+ *   D9  P1.11  OLED reset, active low
+ *   A1  P0.04  haptic MOSFET gate, active high
+ */
+
+/ {
+	chosen {
+		zephyr,display = &ssd1306;
+	};
+
+	aliases {
+		fuel-gauge0 = &max17048;
+		heart-rate-sensor = &max30101;
+	};
+
+	zephyr,user {
+		button-gpios = <&gpio1 10 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		haptic-gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&i2c0 {
+	lsm6dso: lsm6dso@6a {
+		compatible = "smartband,lsm6dso";
+		reg = <0x6a>;
+		status = "okay";
+	};
+
+	max30101: max30101@57 {
+		compatible = "maxim,max30101";
+		reg = <0x57>;
+		status = "okay";
+		/* Red LED only. MAX30102 has no green LED. SpO2 stays off. */
+		acq-mode = "heart-rate";
+		smp-ave = <1>;
+		smp-sr = <100>;
+		led-pw = <215>;
+		adc-rge = <4096>;
+		/* About 12 mA on the red LED. IR and green stay off. */
+		led-pa = [3f 00 00];
+		fifo-rollover-en;
+	};
+
+	max17048: max17048@36 {
+		compatible = "maxim,max17048";
+		reg = <0x36>;
+		status = "okay";
+	};
+
+	ssd1306: ssd1306@3c {
+		compatible = "solomon,ssd1306";
+		reg = <0x3c>;
+		width = <128>;
+		height = <64>;
+		segment-offset = <0>;
+		page-offset = <0>;
+		display-offset = <0>;
+		multiplex-ratio = <63>;
+		segment-remap;
+		com-invdir;
+		prechargep = <0x22>;
+		reset-gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
+	};
+};

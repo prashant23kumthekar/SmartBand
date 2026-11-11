@@ -1,0 +1,299 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB0000000000000000000001 /* SmartBandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000001 /* SmartBandApp.swift */; };
+		AB0000000000000000000003 /* WhoopTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000003 /* WhoopTheme.swift */; };
+		AB0000000000000000000004 /* BandModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000004 /* BandModels.swift */; };
+		AB0000000000000000000005 /* BandCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000005 /* BandCentral.swift */; };
+		AB0000000000000000000006 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000006 /* Components.swift */; };
+		AB0000000000000000000007 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000007 /* HomeView.swift */; };
+		AB0000000000000000000008 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000008 /* ConnectView.swift */; };
+		AB0000000000000000000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0000000000000000000009 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AC0000000000000000000001 /* SmartBandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartBandApp.swift; sourceTree = "<group>"; };
+		AC0000000000000000000002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC0000000000000000000003 /* WhoopTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoopTheme.swift; sourceTree = "<group>"; };
+		AC0000000000000000000004 /* BandModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandModels.swift; sourceTree = "<group>"; };
+		AC0000000000000000000005 /* BandCentral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandCentral.swift; sourceTree = "<group>"; };
+		AC0000000000000000000006 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		AC0000000000000000000007 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AC0000000000000000000008 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		AC0000000000000000000009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD0000000000000000000001 /* SmartBand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartBand.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF0000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000003 /* SmartBand */,
+				AA0000000000000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD0000000000000000000001 /* SmartBand.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000003 /* SmartBand */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000001 /* SmartBandApp.swift */,
+				AC0000000000000000000002 /* Info.plist */,
+				AA0000000000000000000004 /* Theme */,
+				AA0000000000000000000005 /* Model */,
+				AA0000000000000000000006 /* Bluetooth */,
+				AA0000000000000000000007 /* Views */,
+				AC0000000000000000000009 /* Assets.xcassets */,
+			);
+			path = SmartBand;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000004 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000003 /* WhoopTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000005 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000004 /* BandModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000006 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000005 /* BandCentral.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC0000000000000000000006 /* Components.swift */,
+				AC0000000000000000000007 /* HomeView.swift */,
+				AC0000000000000000000008 /* ConnectView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE0000000000000000000001 /* SmartBand */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F10000000000000000000002 /* Build configuration list for PBXNativeTarget "SmartBand" */;
+			buildPhases = (
+				AF0000000000000000000001 /* Sources */,
+				AF0000000000000000000003 /* Frameworks */,
+				AF0000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartBand;
+			productName = SmartBand;
+			productReference = AD0000000000000000000001 /* SmartBand.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE0000000000000000000002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					AE0000000000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = F10000000000000000000001 /* Build configuration list for PBXProject "SmartBand" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA0000000000000000000001;
+			productRefGroup = AA0000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE0000000000000000000001 /* SmartBand */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AF0000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB0000000000000000000009 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF0000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB0000000000000000000001 /* SmartBandApp.swift in Sources */,
+				AB0000000000000000000003 /* WhoopTheme.swift in Sources */,
+				AB0000000000000000000004 /* BandModels.swift in Sources */,
+				AB0000000000000000000005 /* BandCentral.swift in Sources */,
+				AB0000000000000000000006 /* Components.swift in Sources */,
+				AB0000000000000000000007 /* HomeView.swift in Sources */,
+				AB0000000000000000000008 /* ConnectView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F10000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F10000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F10000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartBand/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartband.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F10000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartBand/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartband.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F10000000000000000000001 /* Build configuration list for PBXProject "SmartBand" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10000000000000000000003 /* Debug */,
+				F10000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F10000000000000000000002 /* Build configuration list for PBXNativeTarget "SmartBand" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10000000000000000000005 /* Debug */,
+				F10000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE0000000000000000000002 /* Project object */;
+}

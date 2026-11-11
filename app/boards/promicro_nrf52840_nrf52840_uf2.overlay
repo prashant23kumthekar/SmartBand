@@ -1,0 +1,65 @@
+/*
+ * Same sensor map as the SWD Promicro target. The UF2 variant only
+ * changes the flash layout (Adafruit bootloader).
+ *
+ * Bus: i2c0 P1.00 SDA, P0.11 SCL. Button P1.13, OLED reset P1.11,
+ * haptic P0.24.
+ */
+
+/ {
+	chosen {
+		zephyr,display = &ssd1306;
+	};
+
+	aliases {
+		fuel-gauge0 = &max17048;
+		heart-rate-sensor = &max30101;
+	};
+
+	zephyr,user {
+		button-gpios = <&gpio1 13 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		haptic-gpios = <&gpio0 24 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&i2c0 {
+	lsm6dso: lsm6dso@6a {
+		compatible = "smartband,lsm6dso";
+		reg = <0x6a>;
+		status = "okay";
+	};
+
+	max30101: max30101@57 {
+		compatible = "maxim,max30101";
+		reg = <0x57>;
+		status = "okay";
+		acq-mode = "heart-rate";
+		smp-ave = <1>;
+		smp-sr = <100>;
+		led-pw = <215>;
+		adc-rge = <4096>;
+		led-pa = [3f 00 00];
+		fifo-rollover-en;
+	};
+
+	max17048: max17048@36 {
+		compatible = "maxim,max17048";
+		reg = <0x36>;
+		status = "okay";
+	};
+
+	ssd1306: ssd1306@3c {
+		compatible = "solomon,ssd1306";
+		reg = <0x3c>;
+		width = <128>;
+		height = <64>;
+		segment-offset = <0>;
+		page-offset = <0>;
+		display-offset = <0>;
+		multiplex-ratio = <63>;
+		segment-remap;
+		com-invdir;
+		prechargep = <0x22>;
+		reset-gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
+	};
+};

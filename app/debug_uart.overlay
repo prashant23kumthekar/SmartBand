@@ -1,0 +1,14 @@
+/*
+ * Route printk / the Zephyr console to UART0 instead of USB CDC.
+ *
+ * Promicro / Nice!Nano: P0.09 TX, P0.10 RX, 115200 8N1.
+ * nRF52840 DK already uses UART0 (onboard J-Link VCOM); this overlay is
+ * harmless there.
+ */
+
+/ {
+	chosen {
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+	};
+};
