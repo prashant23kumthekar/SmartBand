@@ -2,7 +2,8 @@
  * SPDX-License-Identifier: Apache-2.0
  *
  * SmartBand sensors plus a BLE GATT peripheral.
- * Target: nrf52840dk/nrf52840 with the Arduino-header overlay.
+ * Board overlay selects the I2C map: nRF52840 DK Arduino header, or
+ * Pro Micro nRF52840 i2c0 (P1.00 SDA, P0.11 SCL).
  */
 
 #include "band.h"
